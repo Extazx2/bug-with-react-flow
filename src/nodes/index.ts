@@ -1,26 +1,42 @@
 import type { NodeTypes } from '@xyflow/react';
 
-import { PositionLoggerNode } from './PositionLoggerNode';
 import { AppNode } from './types';
+import BaseNodeComponent from './BaseNodeComponent';
+import StartNodeComponent from './StartNodeComponent';
 
 export const initialNodes: AppNode[] = [
-  { id: 'a', type: 'input', position: { x: 0, y: 0 }, data: { label: 'wire' } },
   {
-    id: 'b',
-    type: 'position-logger',
-    position: { x: -100, y: 100 },
-    data: { label: 'drag me!' },
+    id: "start",
+    position: { x: 0, y: 0 },
+    data: {
+        label: "start node",
+        pluginId: "START"
+    },
+    type: "START_NODE",
+    draggable: false
   },
-  { id: 'c', position: { x: 100, y: 100 }, data: { label: 'your ideas' } },
+  {
+    id: 'editable-node',
+    type: 'BASE_NODE',
+    position: { x: 0, y: 100 },
+    data: { label: 'drag me!', pluginId: "BASE" },
+  },
+  {
+    id: 'c',
+    type: 'BASE_NODE',
+    position: { x: -100, y: 200 },
+    data: { label: 'random one!', pluginId: "BASE" },
+  },
   {
     id: 'd',
-    type: 'output',
-    position: { x: 0, y: 200 },
-    data: { label: 'with React Flow' },
-  },
+    type: 'BASE_NODE',
+    position: { x: 100, y: 200 },
+    data: { label: 'another random one!', pluginId: "BASE" },
+  }
 ];
 
 export const nodeTypes = {
-  'position-logger': PositionLoggerNode,
+  ["BASE_NODE"]: BaseNodeComponent,
+  "START_NODE": StartNodeComponent
   // Add any of your custom nodes here!
 } satisfies NodeTypes;
